@@ -125,16 +125,31 @@ var buyItems = function(){
 					}
 					else{
 						var newQuantity = res[0].stockQuantity - quantity;
-						var totalPrice = res[0].price * quantity;
+						var salePrice = res[0].price * quantity;
+						var newProductSales = res[0].productSales + salePrice;
 
 						console.log("+++++++++++++++++++++++++++");
 						console.log("Transaction Successful");
 						console.log("You bought " + res[0].productName);
-						console.log("Your total price is: $" + totalPrice);
+						console.log("Your total price is: $" + salePrice);
 						console.log("+++++++++++++++++++++++++++");
 
-						connection.query("UPDATE productInfo SET stockQuantity = ? WHERE itemID = ?", [newQuantity,item], function(err, res){
+						connection.query("UPDATE productInfo SET stockQuantity = ?,productSales = ? WHERE itemID = ?", [newQuantity,newProductSales,item], function(err, res){
 						});
+
+						//
+						var departmentName = res[0].departmentName;
+						connection.query("SELECT * FROM departmentInfo WHERE departmentName = ?",[departmentName], function(err1,res1){
+							var totalSales = res1[0].totalSales;
+							var newTotalSales = totalSales + salePrice;
+
+							connection.query("UPDATE departmentInfo SET totalSales = ? WHERE departmentName = ?", [newTotalSales,departmentName], function(err, res){
+							});
+
+
+						});
+						//
+
 						continueOrEnd();
 					}//end inner else
 				}//end else	
@@ -149,7 +164,7 @@ var continueOrEnd = function(){
 		message:"Do you want to continue shopping?",
 		choices:["yes", "no"]
 	}).then(function(answer){
-		console.log(answer);
+		// console.log(answer);
 		if(answer.continue === "yes")
 			start();
 		else{

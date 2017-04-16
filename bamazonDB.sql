@@ -14,6 +14,10 @@ CREATE TABLE productInfo(
 ALTER TABLE productInfo
 CHANGE departName  departmentName VARCHAR(100);
 
+USE bamazonDB;
+ALTER TABLE productInfo
+ADD productSales DECIMAL(12,2);
+
 INSERT INTO productInfo(productName, departmentName, price, stockQuantity)
 VALUES	("Hop On Pop by Dr Suess", "Books", 4.49, 10),
 				("Are You My Mother? by P D Eastman", "Books", 2.29, 20),
@@ -29,3 +33,23 @@ VALUES	("Hop On Pop by Dr Suess", "Books", 4.49, 10),
 DELETE FROM productInfo;
 
 SELECT DISTINCT * FROM productInfo;
+
+SELECT * FROM productInfo;
+
+
+USE bamazonDB;
+CREATE TABLE departmentInfo(
+	departmentID INTEGER(50) AUTO_INCREMENT NOT NULL,
+    departmentName VARCHAR(100) NOT NULL,
+    overHeadCost DECIMAL(12,2) NOT NULL,
+    totalSales DECIMAL(12,2) NOT NULL,
+    PRIMARY KEY(departmentID)
+);
+
+INSERT INTO departmentInfo(departmentName, overHeadCost, totalSales)
+VALUES("Books", 200.00, 0.00),
+				("Shoes", 200.00, 0.00),
+                ("Jewelry", 300.00, 0.00),
+                ("Electronics", 400.00,0.00);
+
+SELECT * FROM departmentInfo;

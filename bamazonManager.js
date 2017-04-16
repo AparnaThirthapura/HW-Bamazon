@@ -74,7 +74,7 @@ var start = function(){
 };//end of function start
 
 var viewProductsForSale = function(){
-	console.log("Inside viewProductsForSale function");
+	// console.log("Inside viewProductsForSale function");
 
 	connection.query("SELECT * FROM productInfo", function(err,res){
 		// console.log(res);
@@ -97,7 +97,7 @@ var viewProductsForSale = function(){
 };//end of function
 
 var viewLowInventory = function(){
-	console.log("Inside viewLowInventory function");
+	// console.log("Inside viewLowInventory function");
 
 	connection.query("SELECT * FROM productInfo", function(err,res){
 		// console.log(res);
@@ -122,7 +122,7 @@ var viewLowInventory = function(){
 
 
 var addToInventory = function(){
-	console.log("Inside addToInventory function");
+	// console.log("Inside addToInventory function");
 
 	connection.query("SELECT * FROM productInfo", function(err,res){
 		// console.log(res);
@@ -217,7 +217,7 @@ var addToInventory = function(){
 
 
 var addNewProduct = function(){
-	console.log("Inside addNewProduct function");
+	// console.log("Inside addNewProduct function");
 
 	connection.query("SELECT * FROM productInfo", function(err,res){
 		// console.log(res);
@@ -336,7 +336,7 @@ var continueOrEnd = function(){
 		message:"Do you want to continue?",
 		choices:["yes", "no"]
 	}).then(function(answer){
-		console.log(answer);
+		// console.log(answer);
 		if(answer.continue === "yes")
 			start();
 		else{
